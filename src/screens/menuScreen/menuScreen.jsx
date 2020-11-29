@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView, Dimensions } from 'react-native';
+import { View, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
 
 import Text from 'components/text';
 
@@ -8,7 +8,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import colors from '../../themes/colors';
 import HeaderCustom from 'components/HeaderCustom';
 import arrowIcon from '../../Assets/svg/arrowIcon';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const {width, height} = Dimensions.get('window');
 
@@ -127,7 +126,7 @@ function MenuScreen({navigation}) {
                 padding: 10,
                 alignItems: "center"
               }}
-              onPress={navigation.navigate('Map')}
+              onPress={() => navigation.navigate('Map')}
             >
               <Text>Peta</Text>
             </TouchableOpacity>
@@ -139,6 +138,7 @@ function MenuScreen({navigation}) {
                 padding: 10,
                 alignItems: "center"
               }}
+              onPress={() => navigation.navigate('Search')}
             >
               <Text>Cari</Text>
             </TouchableOpacity>

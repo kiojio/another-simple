@@ -1,12 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import 
 { 
   View,
   FlatList,
   ScrollView,
-  TouchableOpacity   
+  TouchableOpacity,
+  ImageBackground,
+  Image
 } from 'react-native';
 import {SvgCss} from 'react-native-svg';
+import Carousel from 'react-native-snap-carousel';
 
 import Text from 'components/text';
 import Header from 'components/Header/';
@@ -85,7 +88,7 @@ const menuList = [
   }
 ];
 
-walletList = [
+const walletList = [
   {
     title: 'Points',
     icon: coin,
@@ -100,8 +103,82 @@ walletList = [
   },
 ]
 
+const bannerData = [
+  {
+    imgLink: 'https://res.cloudinary.com/dpqdlkgsz/image/upload/t_alohomora/v1/homepage/carousel/mcarousel1.jpg'
+  },
+  {
+    imgLink: 'https://res.cloudinary.com/dpqdlkgsz/image/upload/t_alohomora/v1/homepage/carousel/mcarousel2.jpg'
+  },
+  {
+    imgLink: 'https://res.cloudinary.com/dpqdlkgsz/image/upload/t_alohomora/v1/homepage/carousel/mcarousel3.jpg'
+  },
+  {
+    imgLink: 'https://res.cloudinary.com/dpqdlkgsz/image/upload/t_alohomora/v1/homepage/carousel/mcarousel4.jpg'
+  },
+  {
+    imgLink: 'https://res.cloudinary.com/dpqdlkgsz/image/upload/t_alohomora/v1/homepage/carousel/mcarousel5.jpg'
+  }
+]
+
+const capitalCity = [
+  {
+    title: 'Jakarta Utara',
+    imgLink: 'https://res.cloudinary.com/dpqdlkgsz/image/upload/t_alohomora/v1/Periurus%20Memoria/area/thumbnail/jakarta_barat.png'
+  },
+  {
+    title: 'Jakarta Utara',
+    imgLink: 'https://res.cloudinary.com/dpqdlkgsz/image/upload/t_alohomora/v1/Periurus%20Memoria/area/thumbnail/jakarta_barat.png'
+  },
+  {
+    title: 'Jakarta Utara',
+    imgLink: 'https://res.cloudinary.com/dpqdlkgsz/image/upload/t_alohomora/v1/Periurus%20Memoria/area/thumbnail/jakarta_barat.png'
+  },
+  {
+    title: 'Jakarta Utara',
+    imgLink: 'https://res.cloudinary.com/dpqdlkgsz/image/upload/t_alohomora/v1/Periurus%20Memoria/area/thumbnail/jakarta_barat.png'
+  },
+  {
+    title: 'Jakarta Utara',
+    imgLink: 'https://res.cloudinary.com/dpqdlkgsz/image/upload/t_alohomora/v1/Periurus%20Memoria/area/thumbnail/jakarta_barat.png'
+  },
+]
+
 function HomeScreen({navigation}) {
   const [modalSetting, setModalSetting] = useState(false)
+  const banner = useRef()
+  const city = useRef()
+
+  const bannerCard = ({item, index}) => {
+    return (
+      <TouchableOpacity
+        onPress={() => console.log("banner pressed")}
+      >
+        <Image
+          style={styles.bannerCard}
+          source={{uri: item.imgLink}}
+        />
+      </TouchableOpacity>
+    );
+  }
+
+  const cityCard = ({item, index}) => {
+    return (
+      <TouchableOpacity
+        onPress={() => console.log("city pressed")}
+      >
+        <ImageBackground
+          style={styles.cityCard}
+          imageStyle={{borderRadius:10}}
+          source={{uri: item.imgLink}}
+        >
+        <Text style={styles.textCity}>
+          {item.title}
+        </Text>
+        </ImageBackground>
+      </TouchableOpacity>
+    );
+  }
 
   return (
     <View style={styles.screen}>
@@ -191,6 +268,34 @@ function HomeScreen({navigation}) {
             )
           }}
         />
+        <View
+          style={styles.sectionBanner}
+        >
+          <Carousel
+            ref={banner}
+            data={bannerData}
+            renderItem={bannerCard}
+            sliderWidth={styles.sliderWidth}
+            itemWidth={styles.itemWidth * 0.8}
+          />
+        </View>
+        <View
+          style={styles.sectionCity}
+        >
+          <Text style={styles.sectionTitleCity}>Telusuri</Text>
+          <Carousel
+            ref={city}
+            data={capitalCity}
+            slideStyle={{margin:10}}
+            renderItem={cityCard}
+            sliderWidth={styles.sliderWidth}
+            itemWidth={200}
+            layout='default'
+            activeSlideAlignment='start'
+            inactiveSlideScale={1}
+            inactiveSlideOpacity={1}
+          />
+        </View>
       </ScrollView>
       <ModalSetting
         visible={modalSetting}

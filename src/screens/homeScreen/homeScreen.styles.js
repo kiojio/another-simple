@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet,  Dimensions } from 'react-native';
 import fonts from 'themes/fonts';
 import colors from '../../themes/colors';
 const {width, height} = Dimensions.get('window');
@@ -57,5 +57,37 @@ export default StyleSheet.create({
     backgroundColor: colors.graywhite,
     marginRight: 30
   },
-  
+  sliderWidth: width,
+  itemWidth: width,
+  sectionBanner:{
+    marginTop: 30,
+  },
+  bannerCard:{
+    width: width * 0.8,
+    height: 200,
+    borderRadius: 10
+  },
+  sectionCity:{
+    marginTop: 20,
+  },
+  sectionTitleCity:{
+    padding:10,
+    fontSize: 25,
+    fontWeight:"bold"
+  },
+  cityCard:{
+    width: 200,
+    height: 300,
+    borderRadius: 10
+  },
+  textCity: {
+    position: 'absolute',
+    fontSize: 24,
+    alignSelf: "center",
+    textAlign: "center",
+    padding: 20,
+    color: colors.white,
+    fontWeight: 'bold',
+    bottom: 0
+  },
 });
